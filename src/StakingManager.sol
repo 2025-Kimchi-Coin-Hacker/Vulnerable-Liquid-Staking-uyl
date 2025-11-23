@@ -48,7 +48,7 @@ contract StakingManager {
         require(token.balanceOf(msg.sender) >= amount, "balance");
 
         uint256 owed = amount;
-        (bool ok, ) = payable(msg.sender).call{value: owed}("");
+        (bool ok,) = payable(msg.sender).call{value: owed}("");
         require(ok, "transfer failed");
 
         // If the user reentered and already burned, this silently skips burn + leaves stale supply.

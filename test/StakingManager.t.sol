@@ -64,9 +64,8 @@ contract StakingManagerTest is Test {
         vm.deal(user, 1 ether);
 
         vm.prank(user);
-        (bool ok, ) = address(manager).call{value: 1 ether, gas: 300_000}(
-            abi.encodeWithSelector(manager.deposit.selector)
-        );
+        (bool ok,) =
+            address(manager).call{value: 1 ether, gas: 300_000}(abi.encodeWithSelector(manager.deposit.selector));
         assertFalse(ok, "limited-gas deposit should fail due to unbounded loop");
     }
 }
